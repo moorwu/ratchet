@@ -196,7 +196,9 @@
 
     PUSH.id = id;
 
+    /* jshint ignore:start */
     document.body.offsetHeight; // force reflow to prevent scroll
+    /* jshint ignore:end */
   };
 
 
@@ -353,7 +355,9 @@
     }
 
     if (transition === 'fade') {
+      /* jshint ignore:start */
       container.offsetWidth; // force reflow
+      /* jshint ignore:end */
       container.classList.remove('in');
       var fadeContainerEnd = function () {
         container.removeEventListener('webkitTransitionEnd', fadeContainerEnd);
@@ -384,7 +388,9 @@
         }
       };
 
+      /* jshint ignore:start */
       container.offsetWidth; // force reflow
+      /* jshint ignore:end */
       swapDirection      = enter ? 'right' : 'left';
       containerDirection = enter ? 'left' : 'right';
       container.classList.add(containerDirection);

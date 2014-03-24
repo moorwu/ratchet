@@ -76,7 +76,9 @@
     }
 
     popover.style.display = 'block';
+    /* jshint ignore:start */
     popover.offsetHeight;
+    /* jshint ignore:end */
     popover.classList.add('visible');
 
     popover.parentNode.appendChild(backdrop);
