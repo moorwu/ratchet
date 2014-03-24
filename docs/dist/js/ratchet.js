@@ -15,7 +15,7 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
+(function () {
   'use strict';
 
   var findModals = function (target) {
@@ -47,7 +47,7 @@
       event.preventDefault(); // prevents rewriting url (apps can still use hash values in url)
     }
   });
-}());
+})();
 
 /* ========================================================================
  * Ratchet: popovers.js v2.0.1
@@ -57,7 +57,7 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
+(function () {
   'use strict';
 
   var popover;
@@ -127,7 +127,9 @@
     }
 
     popover.style.display = 'block';
+    /* jshint ignore:start */
     popover.offsetHeight;
+    /* jshint ignore:end */
     popover.classList.add('visible');
 
     popover.parentNode.appendChild(backdrop);
@@ -135,7 +137,7 @@
 
   window.addEventListener('touchend', showHidePopover);
 
-}());
+})();
 
 /* ========================================================================
  * Ratchet: push.js v2.0.1
@@ -148,7 +150,7 @@
 
 /* global _gaq: true */
 
-!(function () {
+(function () {
   'use strict';
 
   var noop = function () {};
@@ -335,7 +337,9 @@
 
     PUSH.id = id;
 
+    /* jshint ignore:start */
     document.body.offsetHeight; // force reflow to prevent scroll
+    /* jshint ignore:end */
   };
 
 
@@ -368,7 +372,11 @@
         clearTimeout(options._timeout);
       }
       if (xhr.readyState === 4) {
-        xhr.status === 200 ? success(xhr, options) : failure(options.url);
+        if (xhr.status === 200) {
+          success(xhr, options);
+        } else {
+          failure(options.url);
+        }
       }
     };
 
@@ -482,11 +490,15 @@
     }
 
     if (!transition) {
-      complete && complete();
+      if (complete) {
+        complete();
+      }
     }
 
     if (transition === 'fade') {
+      /* jshint ignore:start */
       container.offsetWidth; // force reflow
+      /* jshint ignore:end */
       container.classList.remove('in');
       var fadeContainerEnd = function () {
         container.removeEventListener('webkitTransitionEnd', fadeContainerEnd);
@@ -498,7 +510,9 @@
         container.parentNode.removeChild(container);
         swap.classList.remove('fade');
         swap.classList.remove('in');
-        complete && complete();
+        if (complete) {
+          complete();
+        }
       };
       container.addEventListener('webkitTransitionEnd', fadeContainerEnd);
 
@@ -510,10 +524,14 @@
         swap.classList.remove('sliding', 'sliding-in');
         swap.classList.remove(swapDirection);
         container.parentNode.removeChild(container);
-        complete && complete();
+        if (complete) {
+          complete();
+        }
       };
 
+      /* jshint ignore:start */
       container.offsetWidth; // force reflow
+      /* jshint ignore:end */
       swapDirection      = enter ? 'right' : 'left';
       containerDirection = enter ? 'left' : 'right';
       container.classList.add(containerDirection);
@@ -619,7 +637,7 @@
   window.addEventListener('popstate', popstate);
   window.PUSH = PUSH;
 
-}());
+})();
 
 /* ========================================================================
  * Ratchet: segmented-controllers.js v2.0.1
@@ -629,7 +647,7 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
+(function () {
   'use strict';
 
   var getTarget = function (target) {
@@ -684,8 +702,13 @@
     targetBody.classList.add(className);
   });
 
-  window.addEventListener('click', function (e) { if (getTarget(e.target)) {e.preventDefault();} });
-}());
+  window.addEventListener('click', function (e) {
+    if (getTarget(e.target)) {
+      e.preventDefault();
+    }
+  });
+
+})();
 
 /* ========================================================================
  * Ratchet: sliders.js v2.0.1
@@ -696,7 +719,7 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
+(function () {
   'use strict';
 
   var pageX;
@@ -822,7 +845,7 @@
   window.addEventListener('touchmove', onTouchMove);
   window.addEventListener('touchend', onTouchEnd);
 
-}());
+})();
 
 /* ========================================================================
  * Ratchet: toggles.js v2.0.1
@@ -833,7 +856,7 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
+(function () {
   'use strict';
 
   var start     = {};
@@ -941,4 +964,4 @@
     toggle    = false;
   });
 
-}());
+})();
